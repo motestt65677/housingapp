@@ -1,9 +1,21 @@
 <html>
     <head>
         <title>{{.title}}</title>
+        
     </head>
     <body>
         Home Page
         {{.title}}
+        <div id="ybox" style="border: 1px solid black;background-color: green; border-radius: 25px; height: 50px; width: 50px;"></div>
     </body>
+    <script src="public/jquery-3.6.0.js"></script>
+    <script>
+        setInterval(function(){
+            $("#ybox").show();
+
+            setTimeout(function(){
+                $("#ybox").hide();
+            }, 1000);
+        }, 2000);
+    </script>
 </html>

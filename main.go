@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/joho/godotenv/autoload"
-	"github.com/motestt65677/housingapp/src/golang/controller"
+	"github.com/motestt65677/housingapp/src/golang/controllers"
 	"github.com/orandin/lumberjackrus"
 	"github.com/sirupsen/logrus"
 )
@@ -51,7 +51,7 @@ func init() {
 func main() {
 	router := gin.New()
 	router.LoadHTMLGlob("views/*")
-	router.GET("/index", controller.Home)
+	router.GET("/index", controllers.Home)
 	router.StaticFS("/public", http.Dir("public"))
 	router.Run("0.0.0.0:50080")
 
