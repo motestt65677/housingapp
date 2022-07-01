@@ -1,4 +1,4 @@
-module housingapp
+module github.com/motestt65677/housingapp/src/golang
 
 go 1.15
 

@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/joho/godotenv/autoload"
-	"github.com/motestt65677/housingapp/controller"
+	"github.com/motestt65677/housingapp/src/golang/controller"
 	"github.com/orandin/lumberjackrus"
 	"github.com/sirupsen/logrus"
 )
