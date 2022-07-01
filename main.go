@@ -49,16 +49,9 @@ func init() {
 }
 
 func main() {
-
-	// models.ConnectDatabase()
-
 	router := gin.New()
-	// router.LoadHTMLFiles("index.html")
 	router.LoadHTMLGlob("views/*")
-
-	//router.LoadHTMLFiles("templates/template1.html", "templates/template2.html")
 	router.GET("/index", controller.Home)
-
 	router.StaticFS("/public", http.Dir("public"))
 	router.Run("0.0.0.0:50080")
 
