@@ -1,0 +1,46 @@
+FROM ubuntu:20.04
+
+SHELL ["/bin/bash", "-c"]
+# ENV VAR
+ENV HOME=/root WORKDIR=/root/golang
+ENV TERM xterm
+
+# Switch to /root
+WORKDIR $HOME
+
+# Setting time zone
+ADD ./docker/Timezone_Taipei /etc/localtime
+
+
+RUN apt update -y\ 
+    && apt upgrade\ 
+    && apt install curl -y
+RUN apt-get update && apt-get install -y lsb-release iputils-ping&& apt-get clean all
+RUN curl -OL https://golang.org/dl/go1.17.3.linux-amd64.tar.gz\
+    && tar -C /usr/local -xvf go1.17.3.linux-amd64.tar.gz\ 
+    && echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc\ 
+    && source ~/.bashrc
+
+RUN go get -u github.com/gin-gonic/gin\
+    && 
+# RUN curl -OL https://github.com/golang-migrate/migrate/releases/download/4/migrate.linux-amd64.tar.gz\
+#     && tar -xvf migrate.linux-amd64.tar.gz\
+#     && mkdir bin\
+#     && mv migrate ~/bin\
+#     && echo 'export PATH=$PATH:/root/bin' >> ~/.bashrc\
+#     && source ~/.bashrc
+RUN curl -s https://packagecloud.io/install/repositories/golang-migrate/migrate/script.deb.sh | bash\
+    && apt-get update\
+    && apt-get install -y migrate
+
+COPY . $WORKDIR
+WORKDIR $WORKDIR
+
+RUN cp $WORKDIR/docker/docker-entrypoint.sh /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+
+# Export port
+EXPOSE 50080
+
+
